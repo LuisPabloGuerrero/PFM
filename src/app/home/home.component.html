@@ -1,5 +1,30 @@
+<div class="container-fluid backgroundHome">
+  <div class="row">
+    <div class="col-md-2">
+      <img src="assets/msn_imgs/logo_live_online.png" class="avatar">
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-2">
+          <p>Nick</p>
+        </div>
+        <div class="col-md-2">
+          <p class="status">Online</p>
+        </div>
+      </div>
+      <div class="row">
+          subnick
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      as
+    </div>
+  </div>
+</div>
 <ul>
-  <li *ngFor="let user of users" routerLink = "/conversation/{{user.userId}}">
-    {{user.nick}}
-  </li>
-</ul>
+    <li *ngFor="let user of users" routerLink = "/conversation/{{user.userId}}">
+      <img src="assets/msn_imgs/logo_live_online.png" class="icon">{{user.nick}}
+    </li>
+  </ul>
