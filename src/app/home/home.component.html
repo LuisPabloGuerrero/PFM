@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let user of users" routerLink = "/conversation/{{user.userId}}">
+    {{user.nick}}
+  </li>
+</ul>
