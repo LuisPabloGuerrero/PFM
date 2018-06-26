@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
     this.users = this.userService.getUsers();
     console.log(this.users);
    }
-
+   
   ngOnInit() {
   }
 

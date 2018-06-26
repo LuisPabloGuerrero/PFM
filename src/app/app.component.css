@@ -10,6 +10,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', end
 .divbar
 {
     border-left: 1px solid white;
+    color: white;
+}
+.divbaRight
+{
+    border-right: 1px solid white;
+    color: white;
 }
 .whiteText
 {

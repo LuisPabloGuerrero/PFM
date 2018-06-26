@@ -16,10 +16,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', end
 }
 .avatar
 {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 }
 .bordeverde
 {
-    border: 3px solid green
+    border: 3px solid rgb(0, 255, 0);
+    background-color: white;
+}
+.row-no-padding > [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
