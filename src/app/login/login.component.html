@@ -1,0 +1,23 @@
+<div class="container background text-center">
+    <br><br>
+    <img class="mb-4" src="assets\msn_imgs\logo_live_appear_offline.png" alt="" width="150" height="150">
+    <h1 class="h3 mb-3 font-weight-normal">Inicia Sesión prro</h1>
+    <label   for="inputEmail" class="sr-only">Email address</label>
+    <input [(ngModel)]="email"type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label   for="inputPassword" class="sr-only">Password</label>
+    <input [(ngModel)]="password"type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <!--<button (click)="checkSession()" class="btn btn-primary btn-block" type="submit">Check Session</button>-->
+    <button (click)="login()" class="btn btn-primary btn-block" type="submit">Log in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+</div>
+
+<input [(ngModel)]="name" type="text" placeholder="Nombre">
+<input [(ngModel)]="email" type="email" placeholder="Correo Electronico">
+<input [(ngModel)]="password" type="password" placeholder="Contraseña">
+<input [(ngModel)]="repeatPassword" type="password" placeholder="Repetir contraseña">
+<button (click)="register()">Registrarse</button>

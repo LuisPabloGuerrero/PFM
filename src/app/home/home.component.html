@@ -17,13 +17,14 @@
   </div>
   <div class="row row-no-padding">
     <div class="col-md-12">
+    <button (click)="logOut()" class="btn btn-danger btn-block" type="submit">Log out</button>
     </div>
   </div>
 </div>
 <div class="container-fluid">
 <div class="row row-no-padding border">
     <div class="input-group col-md-12">
-        <input class="form-control py-2" type="search" value="buscar un contacto o un número" id="example-search-input">
+        <input class="form-control py-2" type="search"  [(ngModel)]="query"  value="buscar un contacto o un número" id="example-search-input">
         <span class="input-group-append">
           <button type="button" id="btnOpen"(click)="openModal(true)">
               <img src="assets/msn_imgs/logo_live_add.png" class="img-fluid icon" alt="">
@@ -33,12 +34,8 @@
   <br>
 </div>
 <div class="row row-no-padding">
-  <ul>
-    <li *ngFor="let user of users">
-      <img src="assets/msn_imgs/logo_live_online.png" class="icon"><b>{{user.name}}</b> -
-      {{user.nick}}
-    </li>
-  </ul>
+<app-friend *ngFor="let user of users | search: query" [user_id]="user.user_id"></app-friend>
+
 </div>
 </div>
     <div id="mdlSample" class="modal fade" role="dialog" [ngStyle]="{'display': mdlSampleIsOpen ? 'block' : 'none', 'opacity': 1}">
@@ -51,34 +48,30 @@
     <div class="form-group">
       <div class="row">
         <div class="col-2">Nombre:</div>
-        <div class="col-md-4"><input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></div>
+        <div class="col-md-4"><input type="text" class="form-control"  [(ngModel)]="name"></div>
         
         <div class="col-2">Correo electronico:</div>
-        <div class="col-md-4"><input type="email" class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></div>
+        <div class="col-md-4"><input type="email" class="form-control"[(ngModel)]="email"></div>
       </div>
       <div class="row">
           <div class="col-2">nick:</div>
-          <div class="col-md-4"><input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></div>
+          <div class="col-md-4"><input type="text" class="form-control"  [(ngModel)]="nick"></div>
           
           <div class="col-2">subNick:</div>
-          <div class="col-md-4"><input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></div>
+          <div class="col-md-4"><input type="text" class="form-control" [(ngModel)]="subNick"></div>
         </div>
         <div class="row">
             <div class="col-2">status:</div>
-            <div class="col-md-4"><input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></div>
+            <div class="col-md-4"><input type="text" class="form-control" [(ngModel)]="status"></div>
             
             <div class="col-2">avatar:</div>
-            <div class="col-md-4"><input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></div>
+            <div class="col-md-4"><input type="text" class="form-control" [(ngModel)]="avatar"></div>
           </div>
     </div>  
-      
-      
-      
-    
     </div>
     <div class="modal-footer" align="right">
-                <button type="button" id="btnOK" class="btn btn-success" (click)="btnOKClick()"><i class="fa fa-check fa-fw"></i> Ok</button>
-                <button type="button" id="btnClose" class="btn btn-danger" (click)="openModal(false)"><i class="fa fa-times fa-fw"></i> Cancel</button></div>
+                <button type="button" id="btnOK" class="btn btn-success" (click)="createUser()"><i class="fa fa-check fa-fw"></i> Ok</button>
+                <button type="button" (click)="openModal(false)"id="btnClose" class="btn btn-danger"><i class="fa fa-times fa-fw"></i> Cancel</button></div>
     </div>
     </div>
     </div>

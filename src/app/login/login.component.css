@@ -1,0 +1,9 @@
+.background
+{
+    background-image: url("/../assets/msn_imgs/msnbg.jpg");
+}
+img
+{
+    border: 3px solid gray;
+    background-color: rgba(245, 245, 245, 0.76);
+}

@@ -6,26 +6,24 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class UserFirebaseService {
 
-  constructor(public angularFireDatabase: AngularFireDatabase){}
-  getUsers(){
+  constructor(public angularFireDatabase: AngularFireDatabase) { }
+  getUsers() {
     return this.angularFireDatabase.list('users');
   }
 
-  getUserById(id)
-  {
-    return this.angularFireDatabase.object('users/'+id);
+  getUserById(id) {
+    return this.angularFireDatabase.object('users/' + id);
   }
-  removeUserById(id)
-  {
+  removeUserById(id) {
     return this.angularFireDatabase.object('users/' + id).remove();
   }
-  createUser(user)
-  {
+  createUser(user) {
     return this.angularFireDatabase.object('users/' + user.user_id).set(user);
   }
-  editUser(user)
-  {
-    return this.angularFireDatabase.object('user/'+user.user_id).set(user);
+  editUser(user) {
+    return this.angularFireDatabase.object('user/' + user.user_id).set(user);
   }
-
+  getUserLogged(userid) {
+    return this.angularFireDatabase.object('users/' + userid);
+  }
 }

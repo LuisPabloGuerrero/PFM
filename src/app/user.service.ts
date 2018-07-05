@@ -7,27 +7,23 @@ import { debug } from 'util';
 export class UserService {
 
   users = [
-    {nick: "Luis", subNick: 'Saca los tamales', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com',userId: 1},
-    {nick: "Pablo", subNick: 'mi Subnick', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com',userId: 2},
-    {nick: "Atenas", subNick: 'mi Subnick', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com',userId: 3},
-    {nick: "Arisbel", subNick: 'mi Subnick', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com',userId: 4}
+    {nick: 'Luis', subNick: 'Saca los tamales', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com', userId: 1},
+    {nick: 'Pablo', subNick: 'mi Subnick', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com', userId: 2},
+    {nick: 'Atenas', subNick: 'mi Subnick', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com', userId: 3},
+    {nick: 'Arisbel', subNick: 'mi Subnick', avatar: 'avatar.jpg', status: 'online', email: 'mi@email.com', userId: 4}
   ];
 
   constructor() { }
 
-  getUsers()
-  {
+  getUsers() {
     return this.users;
   }
-  
-  getUserById(userId)
-  {
+  getUserById(userId)  {
     let user = {};
-    
-    user = this.users.filter( (u) =>{
+    user = this.users.filter( (u) => {
       return u.userId === userId;
     })[0];
-    return user; 
+    return user;
   }
 
 }

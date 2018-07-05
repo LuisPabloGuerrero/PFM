@@ -1,3 +1,21 @@
-<p>
-  conversation works!
-</p>
+<div class="container-fluid ">
+  <div class="col-md-4">
+    asdasdsad
+  </div>
+  <div class="col-md-8">
+    <div class="row backgroundHome">
+        {{friend.name}}
+        {{friend.subNick}}
+      </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="message" *ngFor ="let message of conversation">
+          {{getNickById(message.sender)}} dice: {{message.content}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <textarea style="height: 100%;width: 100%"(keyup.enter)="sendMessages()" [(ngModel)]="message" name="" id="" cols="30" rows="10"></textarea>
+    </div>
+  </div>
+  </div>
