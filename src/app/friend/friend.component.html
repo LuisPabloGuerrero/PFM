@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12" *ngIf="friend" routerLink="/conversation/{{friend.user_id}}">
-            -<img src="assets/msn_imgs/logo_live_online.png" class="icon">
-            <b>{{friend.name}}</b>
+            <img src="assets/msn_imgs/logo_live_{{friend.status || 'offline'}}.png" class="status icon">
+            <b>{{friend.name}}</b>-{{friend.nick}}
         </div>
     </div>
 </div>

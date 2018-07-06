@@ -57,18 +57,13 @@
     <hr />
     <div class="row" *ngIf="users">
       <div class="col-md-12">
-        <b>Amigos ({{users.length}}/{{users.length}})</b>
+        <b>Amigos ({{userObject.friends.length}}/{{userObject.friends.length}})</b>
       </div>
-      <!--<app-friend *ngFor="let user of users | search: query" [user_id]="user.user_id"></app-friend>-->
-      <div class="col-md-12 contact-list-item" routerLink="/conversation/{{u.user_id}}" *ngFor="let u of users">
-        <img src="assets/msn_imgs/logo_live_{{u.status || 'offline'}}.png" class="status icon">
-        <b>{{u.nick}}</b>
-        <small *ngIf="u.subNick"> - {{u.subNick}}</small>
-      </div>
+      <app-friend  class="col-md-12" *ngFor="let u of userObject.friends | search: query" [user_id]="u"></app-friend>
+
     </div>
   </div>
 </div>
-
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Agregar amigo</h4>
@@ -85,5 +80,35 @@
     <button type="button" class="btn btn-outline-dark" (click)="sendRequest()">Enviar</button>
   </div>
 </ng-template>
+
+<ng-template #friendRequest let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Agregar amigo</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="card-text">¿Deseas Agregar a esta persona a tu lista de amigos?</p>
+
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" name="addToMsn" value="yes" id="add-yes" [(ngModel)]="shouldAdd" />
+      <label class="custom-control-label" for="add-yes">Si. Los Contacto de Messenger forman parte de tu red.</label>
+    </div>
+
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" name="addToMsn" value="no" id="add-no" [(ngModel)]="shouldAdd" />
+      <label class="custom-control-label" for="add-no">No. Note preocupes no diremos a nadie tu decisión</label>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="accept()">Aceptar</button>
+    <button type="button" class="btn btn-dark" (click)="decideLater()">Decidir más tarde</button>
+  </div>
+</ng-template>
 <hr>
 <pre>{{closeResult}}</pre>
+
+
+

@@ -103,7 +103,8 @@ export class ConfigurationComponent {
       nick: this.myUser.nick,
       subNick: this.myUser.subNick,
       user_id: this.user.uid,
-      avatar: path
+      avatar: path,
+      friends: this.myUser.friends
     };
     const promise =     this.userFirebaseService.editUser(user);
     promise.then( () => {
@@ -120,7 +121,8 @@ export class ConfigurationComponent {
       nick: this.myUser.nick,
       subNick: this.myUser.subNick,
       user_id: this.user.uid,
-      avatar: this.myUser.avatar
+      avatar: this.myUser.avatar,
+      friends: this.myUser.friends
     };
     const promise =     this.userFirebaseService.editUser(user);
     promise.then( () => {

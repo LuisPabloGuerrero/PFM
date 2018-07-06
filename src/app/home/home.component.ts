@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { UserFirebaseService } from '../user-firebase.service';
 import { Router } from '../../../node_modules/@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from '../request.service';
 import { subscribeOn } from '../../../node_modules/rxjs/operators';
+import { VirtualTimeScheduler } from '../../../node_modules/rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,6 +27,11 @@ export class HomeComponent implements OnInit {
   user: any;
   myUser: any;
   subNickValue: string;
+  shouldAdd = 'yes';
+  requests = [];
+  currentRequest: any;
+  userObject: any;
+  @ViewChild ('friendRequest') friendRequestModal;
   private mdlSampleIsOpen = false;
   private openModal(open: boolean): void {
   this.mdlSampleIsOpen = open; }
@@ -36,13 +42,54 @@ export class HomeComponent implements OnInit {
     stream.valueChanges().subscribe( (result) =>  {
     this.users = result;
     console.log(this.users);
+    this.getRequestForEmail();
   });
   const streamUsuario = this.authenticationService.getStatus();
   streamUsuario.subscribe( (resultad) => {
    this.getUserById(resultad.uid);
     this.user = resultad;
     console.log(this.user);
+    this.userFirebaseService.getUserById(this.user.uid).valueChanges().subscribe(
+      (result2) => {
+        this.userObject = result2;
+        console.log(this.userObject);
+        this.userObject.friends = Object.values(this.userObject.friends);
+
+      });
   });
+  }
+  getRequestForEmail() {
+    const stream = this.requestService.getRequestForEmail(this.user.email);
+    stream.valueChanges().subscribe( (requests) => {
+      this.requests = requests;
+      this.requests = this.requests.filter( (r) => {
+        return r.status !== 'accepted' && r.status !== 'rejected';
+      });
+      this.requests.forEach( (r) => {
+        this.currentRequest = r;
+        this.openModalRequest();
+      });
+      console.log(this.requests);
+    });
+  }
+  accept() {
+    if (this.shouldAdd === 'yes') {
+      this.requestService.setRequestStatus(this.currentRequest, 'accepted').then(
+        () => {
+          this.userFirebaseService.addFriend(this.user.uid, this.currentRequest.sender);
+          alert('Sí aceptó, dijo que chi');
+        });
+    } else {
+      this.requestService.setRequestStatus(this.currentRequest, 'rejected');
+      alert('no aceptó alv');
+    }
+  }
+  decideLater() {
+    alert('decidiremos despues');
+    this.requestService.setRequestStatus(this.currentRequest, 'decide_later');
+  }
+  openModalRequest() {
+    this.modalService.open(this.friendRequestModal);
   }
   open(content) {
     this.modalService.open(content).result.then( (result) => {
@@ -97,7 +144,8 @@ export class HomeComponent implements OnInit {
       nick: this.myUser.nick,
       subNick: this.myUser.subNick,
       user_id: this.user.uid,
-      avatar: this.myUser.avatar
+      avatar: this.myUser.avatar,
+      friends: this.myUser.friends
     };
     const promise =     this.userFirebaseService.editUser(user);
     promise.then( () => {
@@ -114,7 +162,8 @@ export class HomeComponent implements OnInit {
       nick: this.myUser.nick,
       subNick: this.subNickValue,
       user_id: this.user.uid,
-      avatar: this.myUser.avatar
+      avatar: this.myUser.avatar,
+      friends: this.myUser.friends
     };
     const promise =     this.userFirebaseService.editUser(user);
     promise.then( () => {
@@ -131,7 +180,8 @@ export class HomeComponent implements OnInit {
       nick: this.nickValue,
       subNick: this.myUser.subNick,
       user_id: this.user.uid,
-      avatar: this.myUser.avatar
+      avatar: this.myUser.avatar,
+      friends: this.myUser.friends
     };
     const promise =     this.userFirebaseService.editUser(user);
     promise.then( () => {
