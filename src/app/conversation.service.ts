@@ -14,6 +14,10 @@ export class ConversationService {
   getConversation (uid) {
     return this.angularFireDatabase.list( 'conversation/' + uid);
   }
+  setConversationAttribute(conversationId, messageTimestamp, attribute, value) {
+    return this.angularFireDatabase.object( 'conversation/' + conversationId + '/' + messageTimestamp +
+    '/' + attribute).set(value);
+  }
 }
 /*
 conversations tiene una conversasion de dos personas

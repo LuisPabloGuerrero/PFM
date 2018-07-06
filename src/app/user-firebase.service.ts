@@ -21,7 +21,7 @@ export class UserFirebaseService {
     return this.angularFireDatabase.object('users/' + user.user_id).set(user);
   }
   editUser(user) {
-    return this.angularFireDatabase.object('user/' + user.user_id).set(user);
+    return this.angularFireDatabase.object('users/' + user.user_id).set(user);
   }
   getUserLogged(userid) {
     return this.angularFireDatabase.object('users/' + userid);

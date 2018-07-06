@@ -15,12 +15,17 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import { SearchPipe } from './pipes/search';
 import { FriendComponent } from './friend/friend.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { DropZoneDirective } from './drop-zone.directive';
+import { FileSizePipe } from './pipes/file-size.pipe';
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'conversation/:userId', component: ConversationComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'configuration', component: ConfigurationComponent}
 ];
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ const appRoutes: Routes = [
     LoginComponent,
     ContactComponent,
     SearchPipe,
-    FriendComponent
+    FriendComponent,
+    ConfigurationComponent,
+    DropZoneDirective,
+    FileSizePipe
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,8 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
